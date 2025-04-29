@@ -1,0 +1,19 @@
+.success {
+  max-height: 70svh;
+  max-width: 333px;
+  border-radius: 1rem;
+  background: hsl(0, 0%, 100%);
+
+  img {
+    height: 36px;
+  }
+  h1 {
+    line-height: 2.5rem;
+  }
+  p {
+    margin-block: 0.75rem;
+  }
+  .button {
+    max-width: 100%;
+  }
+}
