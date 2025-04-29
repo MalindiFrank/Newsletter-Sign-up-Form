@@ -17,3 +17,27 @@
     max-width: 100%;
   }
 }
+
+/*email validation*/
+.input-field {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.input-error {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+}
+
+.error-message {
+  color: red;
+  float: right;
+  font-size: 0.9em;
+  display: none;
+}
+
+.error-message.show {
+  display: inline;
+}

@@ -6,7 +6,8 @@
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-body, main,
+body,
+main,
 section ul li {
   display: flex;
   align-items: center;
@@ -14,8 +15,7 @@ section ul li {
 
 body {
   height: 100svh;
-  display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
   background: hsl(235, 18%, 26%);
 }
@@ -78,5 +78,13 @@ section {
   .button:hover {
     background: hsl(4, 100%, 67%);
     box-shadow: 4px 4px 16px hsl(4, 100%, 67%);
+  }
+}
+
+.attribution {
+  margin-top: 2rem;
+  color: hsl(0, 0%, 100%);
+  a {
+    color: rgb(189, 173, 173);
   }
 }
