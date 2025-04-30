@@ -8,10 +8,10 @@ let elements = {
 function showHtmlElement() {
   if (elements.mainIsDisplayed) {
     elements.main.style.display = "none";
-    elements.popup.style.display = "";
+    elements.popup.style.display = " ";
     elements.mainIsDisplayed = false;
   } else {
-    elements.main.style.display = "";
+    elements.main.style.display = " ";
     elements.popup.style.display = "none";
     elements.mainIsDisplayed = true;
   }
