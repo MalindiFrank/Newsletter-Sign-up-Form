@@ -62,6 +62,7 @@
   function query(classname) {
     return document.querySelector(classname);
   }
+  console.log(e)
 
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".button").forEach((btn) => {
