@@ -1,38 +1,60 @@
-let elements = {
-  mainIsDisplayed: true,
+const e = {
+  isMsgDisplayed: false,
   main: document.querySelector("main"),
-  popup: document.querySelector(".success"),
+  msg: document.querySelector(".success"),
+  emailInput: document.querySelector("#email"),
+  errorText: document.querySelector("#email-error"),
+  subscriber: document.querySelector(".subscriber-email"),
   buttons: document.querySelectorAll(".button"),
 };
 
-function showHtmlElement() {
-  if (elements.mainIsDisplayed) {
-    elements.main.style.display = "none";
-    elements.popup.style.display = "";
-    elements.mainIsDisplayed = false;
+function successMessageHandler() {
+  if (!e.isMsgDisplayed) {
+    displaySuccessMsg();
   } else {
-    elements.main.style.display = "";
-    elements.popup.style.display = "none";
-    elements.mainIsDisplayed = true;
+    hideSuccessMsg();
   }
+  e.isMsgDisplayed = !e.isMsgDisplayed;
 }
 
-function isEmailValid() {
-  const emailInput = document.getElementById("email");
-  const errorText = document.getElementById("email-error");
-  const email = emailInput.value.trim();
+function displaySuccessMsg() {
+  e.msg.style.display = "";
+  e.main.style.display = "none";
+}
+
+function hideSuccessMsg() {
+  e.main.style.display = "";
+  e.msg.style.display = "none";
+}
+
+function setSubscriberEmail() {
+  successMessageHandler();
+  e.subscriber.textContent = e.emailInput.value;
+}
+
+function validateEmail() {
+  const emailInput = e.emailInput;
+  const errorText = e.errorText;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!emailRegex.test(email)) {
-    emailInput.classList.add("input-error");
-    errorText.classList.add("show");
+  if (!emailRegex.test(emailInput.value.trim())) {
+    addClassAttribute(emailInput, "input-error");
+    addClassAttribute(errorText, "show");
   } else {
-    emailInput.classList.remove("input-error");
-    errorText.classList.remove("show");
-    showHtmlElement();
+    removeClassAttribute(emailInput, "input-error");
+    removeClassAttribute(errorText, "show");
+    setSubscriberEmail();
   }
 }
 
-elements.buttons.forEach((btn) => {
-  btn.addEventListener("click", isEmailValid);
+function addClassAttribute(element, classname) {
+  element.classList.add(classname);
+}
+
+function removeClassAttribute(element, classname) {
+  element.classList.remove(classname);
+}
+
+e.buttons.forEach((btn) => {
+  btn.addEventListener("click", validateEmail);
 });
