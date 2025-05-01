@@ -1,38 +1,71 @@
-let elements = {
-  mainIsDisplayed: true,
-  main: document.querySelector("main"),
-  popup: document.querySelector(".success"),
-  buttons: document.querySelectorAll(".button"),
-};
+(function () {
+  const e = {
+    isMsg: false,
+  };
 
-function showHtmlElement() {
-  if (elements.mainIsDisplayed) {
-    elements.main.style.display = "none";
-    elements.popup.style.display = " ";
-    elements.mainIsDisplayed = false;
-  } else {
-    elements.main.style.display = " ";
-    elements.popup.style.display = "none";
-    elements.mainIsDisplayed = true;
+  (function () {
+    e["main"] = query("main");
+    e["msg"] = query(".success");
+    e["emailInput"] = query("#email");
+    e["errorText"] = query("#email-error");
+    e["subscriber"] = query(".subscriber-email");
+  })();
+
+  function validateEmail() {
+    const email = e.emailInput;
+    const errorText = e.errorText;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailRegex.test(email.value.trim())) {
+      setSubscriberEmail();
+    } else {
+      addClassAttribute(email, "input-error");
+      addClassAttribute(errorText, "show");
+      return;
+    }
+    removeClassAttribute(email, "input-error");
+    removeClassAttribute(errorText, "show");
   }
-}
 
-function isEmailValid() {
-  const emailInput = document.getElementById("email");
-  const errorText = document.getElementById("email-error");
-  const email = emailInput.value.trim();
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!emailRegex.test(email)) {
-    emailInput.classList.add("input-error");
-    errorText.classList.add("show");
-  } else {
-    emailInput.classList.remove("input-error");
-    errorText.classList.remove("show");
-    showHtmlElement();
+  function successMessageHandler() {
+    !e.isMsg ? displaySuccessMsg() : hideSuccessMsg();
+    e.isMsg = !e.isMsg;
   }
-}
 
-elements.buttons.forEach((btn) => {
-  btn.addEventListener("click", isEmailValid);
-});
+  function displaySuccessMsg() {
+    setDisplayValue(e.msg, "");
+    setDisplayValue(e.main, "none");
+  }
+
+  function hideSuccessMsg() {
+    setDisplayValue(e.main, "");
+    setDisplayValue(e.msg, "none");
+  }
+
+  function setDisplayValue(element, value) {
+    element.style.display = value;
+  }
+
+  function setSubscriberEmail() {
+    e.subscriber.textContent = e.emailInput.value;
+    successMessageHandler();
+  }
+
+  function addClassAttribute(element, classname) {
+    element.classList.add(classname);
+  }
+
+  function removeClassAttribute(element, classname) {
+    element.classList.remove(classname);
+  }
+
+  function query(classname) {
+    return document.querySelector(classname);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".button").forEach((btn) => {
+      btn.addEventListener("click", validateEmail);
+    });
+  });
+})();

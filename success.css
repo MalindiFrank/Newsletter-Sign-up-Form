@@ -41,3 +41,7 @@
 .error-message.show {
   display: inline;
 }
+
+.subscriber-email {
+  color: hsl(251, 38%, 53%);
+}
